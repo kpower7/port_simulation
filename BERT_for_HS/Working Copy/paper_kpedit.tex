@@ -1,0 +1,308 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Author template for Management Science (mnsc) for articles with no e-companion (EC)
+%% Mirko Janc, Ph.D., INFORMS, mirko.janc@informs.org
+%% ver. 0.95, December 2010
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\documentclass[mnsc,blindrev]{informs3}
+\documentclass[mnsc,nonblindrev]{informs3} % current default for manuscript submission
+
+\OneAndAHalfSpacedXI
+%%\OneAndAHalfSpacedXII % Current default line spacing
+%%\DoubleSpacedXII
+%%\DoubleSpacedXI
+
+% If hyperref is used, dvi-to-ps driver of choice must be declared as
+%   an additional option to the \documentclass. For example
+%\documentclass[dvips,mnsc]{informs3}      % if dvips is used
+%\documentclass[dvipsone,mnsc]{informs3}   % if dvipsone is used, etc.
+
+% Private macros here (check that there is no clash with the style)
+
+% Natbib setup for author-year style
+\usepackage{natbib}
+ \bibpunct[, ]{(}{)}{,}{a}{}{,}%
+ \def\bibfont{\small}%
+ \def\bibsep{\smallskipamount}%
+ \def\bibhang{24pt}%
+ \def\newblock{\ }%
+ \def\BIBand{and}%
+\usepackage{multirow}
+%% Setup of theorem styles. Outcomment only one.
+%% Preferred default is the first option.
+\TheoremsNumberedThrough     % Preferred (Theorem 1, Lemma 1, Theorem 2)
+%\TheoremsNumberedByChapter  % (Theorem 1.1, Lema 1.1, Theorem 1.2)
+\ECRepeatTheorems
+
+% For better table formatting
+\usepackage{booktabs} 
+
+%% Setup of the equation numbering system. Outcomment only one.
+%% Preferred default is the first option.
+\EquationsNumberedThrough    % Default: (1), (2), ...
+%\EquationsNumberedBySection % (1.1), (1.2), ...
+
+% For new submissions, leave this number blank.
+% For revisions, input the manuscript number assigned by the on-line
+% system along with a suffix ".Rx" where x is the revision number.
+\MANUSCRIPTNO{MS-0001-1922.65}
+
+\usepackage{graphicx}
+
+%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%
+
+% Outcomment only when entries are known. Otherwise leave as is and
+%   default values will be used.
+%\setcounter{page}{1}
+%\VOLUME{00}%
+%\NO{0}%
+%\MONTH{Xxxxx}% (month or a similar seasonal id)
+%\YEAR{0000}% e.g., 2005
+%\FIRSTPAGE{000}%
+%\LASTPAGE{000}%
+%\SHORTYEAR{00}% shortened year (two-digit)
+%\ISSUE{0000} %
+%\LONGFIRSTPAGE{0001} %
+%\DOI{10.1287/xxxx.0000.0000}%
+
+% Author's names for the running heads
+% Sample depending on the number of authors;
+% \RUNAUTHOR{Jones}
+\RUNAUTHOR{Koch, Power and Dugundji}
+% \RUNAUTHOR{Jones, Miller, and Wilson}
+% \RUNAUTHOR{Jones et al.} % for four or more authors
+% Enter authors following the given pattern:
+%\RUNAUTHOR{}
+
+% Title or shortened title suitable for running heads. Sample:
+% \RUNTITLE{Bundling Information Goods of Decreasing Value}
+% Enter the (shortened) title:
+\RUNTITLE{\textcolor{blue}{LLM-Based Classification of Unstructured Shipping Manifest Data into Harmonized System (HS) Categories}}
+
+% Full title. Sample:
+% \TITLE{Bundling Information Goods of Decreasing Value}
+% Enter the full title:
+\TITLE{\textcolor{blue}{LLM-Based Classification of Unstructured Shipping Manifest Data into Harmonized System (HS) Categories}}
+
+% Block of authors and their affiliations starts here:
+% NOTE: Authors with same affiliation, if the order of authors allows,
+%   should be entered in ONE field, separated by a comma.
+%   \EMAIL field can be repeated if more than one author
+\ARTICLEAUTHORS{%
+\AUTHOR{Thomas Koch, Kevin Power, Elenna Dugundji}
+\AFF{Center for Transportation and Logistics, Massachusetts Institute of Technology, Cambridge, MA 02478, \EMAIL{thakoch@mit.edu}} %, \URL{}}
+
+% Enter all authors
+} % end of the block
+
+\ABSTRACT{%
+\textcolor{blue}{This study proposes a structured framework for automating Harmonized System (HS) code classification from short-text product descriptions, using natural language processing (NLP). The technical architecture is designed to address key challenges in processing unstructured shipping manifest data, including ambiguity and inconsistent formatting. Multiple machine learning (ML) approaches and Large Language Models (LLMs) are evaluated, with the top-performing model achieving 87.9\% classification accuracy at the 6-digit HS code level (HS6). The research aims to streamline customs classification procedures with a scalable solution. Beyond streamlining customs procedures, the framework enables ancillary applications such as trade analytics, and enhanced compliance monitoring.}
+
+% Enter your abstract
+}%
+
+% Sample
+%\KEYWORDS{deterministic inventory theory; infinite linear programming duality;
+%  existence of optimal policies; semi-Markov decision process; cyclic schedule}
+
+% Fill in data. If unknown, outcomment the field
+\KEYWORDS{Natural Language Processing (NLP), Large Language Models (LLM), Classification, Harmonized System (HS)} \HISTORY{This paper was
+first submitted on March 14th, 2025.}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Samples of sectioning (and labeling) in MNSC
+% NOTE: (1) \section and \subsection do NOT end with a period
+%       (2) \subsubsection and lower need end punctuation
+%       (3) capitalization is as shown (title style).
+%
+%\section{Introduction.}\label{intro} %%1.
+%\subsection{Duality and the Classical EOQ Problem.}\label{class-EOQ} %% 1.1.
+%\subsection{Outline.}\label{outline1} %% 1.2.
+%\subsubsection{Cyclic Schedules for the General Deterministic SMDP.}
+%  \label{cyclic-schedules} %% 1.2.1
+%\section{Problem Description.}\label{problemdescription} %% 2.
+
+% Text of your paper here
+
+\section{Introduction}
+
+\textcolor{blue}{The Harmonized System (HS) code is a globally recognized classification standard used to categorize traded goods for customs clearance, trade regulations, and tariff calculations. HS codes are based on the system established by the World Customs Organization (WCO) (\cite{pierce2012concording}). According to the WCO, the Harmonized System's six-digit nomenclature governs the classification of over 98\% of internationally traded merchandise, requiring precise alignment between product descriptions and over 5000 commodity categories.}
+
+\textcolor{blue}{Accurate HS code assignment is critical but remains a labor-intensive and error-prone process due to inconsistent product descriptions, linguistic ambiguity, and trade volume growth. Traditional rule-based automation and manual classification struggle to scale efficiently. Transformer-based NLP models offer promising solutions to automate HS code classification by leveraging context-aware language models trained on large-scale trade data.}
+
+\textcolor{blue}{This study develops an NLP-driven approach that fine-tunes large language models for HS code classification using unstructured shipping manifest data. By leveraging deep learning techniques and a large volume of data, we aim to improve classification accuracy and scalability. The proposed framework is implemented on SuperCloud HPC infrastructure \cite{reuther2018interactive}.}
+
+\subsection{The Complexity of HS Code Assignment} 
+\textcolor{blue}{The hierarchical structure of HS codes begins with the first two digits denoting the chapter (e.g., "09" for coffee and spices), followed by two digits for the heading (e.g., "0901" for coffee), and the final two digits specifying subheadings (e.g., "0901-21" for roasted coffee beans, not decaffeinated).} 
+
+\textcolor{blue}{Classification processes face systemic challenges, including ambiguity in unstructured shipping manifests (for example; vague descriptors like "industrial machinery parts") and formatting inconsistencies. The issues are compounded by escalating trade volumes, making manual classification increasingly infeasible. Novel products increase the risk of misclassifications; a critical concern given that it can lead to tariff discrepancies, supply chain delays, or compliance penalties.}
+
+\textcolor{blue}{Traditional rule-based automation systems, reliant on keyword matching or deterministic logic, struggle to generalize to novel or ambiguously described products. This limitation underscores the need for adaptive, data-driven approaches capable of interpreting semantic nuances in product descriptions.}
+
+\subsection{Toward an NLP-Driven Solution}
+
+\textcolor{blue}{This study proposes a structured NLP framework to automate HS code classification, addressing gaps in scalability and accuracy inherent to manual and rule-based methods.NLP is uniquely suited for HS code classification due to its ability to interpret unstructured and ambiguous text descriptions. Unlike rule-based methods that often rely on rigid keyword matching, NLP models have contextual understanding and can capture more semantic nuances in language. Given that product descriptions in shipping manifests often contain abbreviations, synonyms, and domain-specific language, a structured NLP framework can generalize well across varied descriptions, improving both accuracy and scalability.}
+
+\textcolor{blue}{Transformers, particularly BERT (Bidirectional Encoder Representations from Transformers), have revolutionized NLP by introducing self-attention mechanisms that allow models to understand the full context of a word within a sentence. This contextual awareness is particularly valuable in HS code classification, where subtle distinctions between terms can significantly alter classification outcomes. For instance, the phrases "plastic bottle" (HS 3923.30: Carboys, Bottles, Flasks And Similar Articles, Of Plastics) and "plastic bottle caps" (HS 3923.50: Stoppers, lids, caps, \& Other Closures of Plastic) may appear similar in keyword-based approaches but belong to different HS code categories. These contextual differences bring challenges for classification but using NLP we attempt to capture these nuances.}  \colorbox{yellow}{https://www.datamyne.com/hts/39/3923}
+
+\textcolor{blue}{Fine-tuning transformer models on domain-specific datasets enhances classification performance by adapting pre-trained language representations to the specific patterns in those datasets. Thus, by fine-tuning the models using a labelled dataset of product description and HS code matches, we enhance the models’ ability to understand the specific patterns found in the trade documentation. Additionally, transformers’ ability to handle variable-length inputs ensures robustness against inconsistencies in product descriptions.}
+
+\textcolor{blue}{Other machine learning methods, such as Support Vector Machines (SVM) and Logistic Regression, were also explored. However, transformer-based models demonstrated superior performance due to their ability to dynamically capture contextual dependencies through self-attention mechanisms. Several BERT-based models were fine-tuned and tested under the same conditions for benchmarking, with results indicating that transformers consistently outperformed traditional machine learning approaches in both accuracy and F1 score.}
+
+\textcolor{red}{While NLP-based classification models significantly improve scalability and accuracy over rule-based approaches, they are not without limitations. One challenge lies in handling inherent ambiguities in product descriptions, particularly when a term can refer to multiple, context-dependent product categories. For instance, a description containing only the word "Router" could be classified under HS 8517.62 if referring to a wireless networking device, or HS 8467.19 if referring to a handheld power tool used for woodcutting. Short and vague descriptions can still lead to misclassifications when insufficient contextual information is available to differentiate between possible categories.}
+
+\section{Background}
+
+\subsection{Traditional Approaches for Classifying Short-Text Descriptions}
+
+\textcolor{blue}{Early attempts to automate the classification of short text descriptions, for example spending records or transaction descriptions, were based on classical machine learning with engineered features. \citet{mukherjee2008classifying} applied an SVM classifier to procurement spend descriptions organized in a hierarchical commodity taxonomy. Their system also includes a feature correction module that helps improve the accuracy of the classifier by correcting errors in the spend descriptions. The paper evaluated the proposed system on a real-world dataset of spend descriptions, achieving 91. 64\% accuracy at the top category level and 87.64\% at the second level.}
+
+\textcolor{blue}{Subsequent studies on short financial text followed similar approaches. \citet{garcia2020identifying}. (2020) used an SVM with bag-of-words features to identify banking transaction descriptions; a challenging task because the descriptions are often short and incomplete, and they may use abbreviations. Their proposed system first preprocesses the descriptions by removing stop words and punctuation. The descriptions are then converted into a bag-of-words representation, where each word is represented by a unique integer. The SVM classifier is then trained on a dataset of labeled descriptions. The paper evaluated the proposed system on a dataset of 10,000 banking transaction descriptions. The results showed that the system achieved an accuracy of 90.4\%, outperforming baselines that use a naive Bayes classifier or a decision tree classifier. These works demonstrated the feasibility of text classification for trade and finance data, but they relied on manual feature engineering and provide limited scalability to novel descriptions.}
+
+\textcolor{blue}{Researchers sought to improve classical models by incorporating more informative text representations. \citet{jorgensen2021machine} introduced character-level word embeddings to represent financial transaction text across multiple companies. These texts can vary significantly from company to company, even for the same transaction. Their proposed system first preprocesses the transaction texts by removing stop words and punctuation. The texts are then converted into character-level word embeddings, which are vectors that represent the characters in the text. They evaluated the proposed system on a dataset of financial transactions from 473 companies. The results showed that the system achieved an average accuracy of 80.50\%, outperforming baselines that exclude the transaction texts or rely on a lexical bag-of-words text representation.}
+
+\textcolor{blue}{In parallel, domain-specific adaptations were explored for commodity classification. \citet{barbosaml2021} developed a hierarchical classification scheme for HS codes, training separate models for each level of the code (2-digit chapter, 4-digit heading, 6-digit subheading) with rule-based feature encoding. Their focus was on the fashion industry; thus, only Chapters 61, 62, 63, 64, 65, 42, and 43 were considered for the analysis. This approach achieved high accuracy at broad category levels (87. 64\% in HS2) but saw a performance drop for more granular classifications (53. 42\% in HS6).}
+
+\subsection{Unsupervised and Weakly Supervised ML Methods}
+
+\textcolor{blue}{Historically, a challenge in HS code classification is the limited availability of high-quality labeled training data. To tackle this, some studies have turned to unsupervised or weakly supervised techniques. \citet{chenmachine2021} developed an unsupervised mechanism using an off-the-shelf embedding encoder to represent commodity descriptions and flag likely misclassifications of HS codes. When deployed on a test set of labeled customs documents provided by Dutch customs officials, their model achieved a performance of ~71\% overall accuracy.}
+
+
+\citet{toran2023scalable} addresses the problem of classifying bank transactions with limited labeled data. The paper proposes a weakly supervised approach that uses unlabeled data to improve the classification accuracy. The proposed system first uses a self-supervised learning algorithm to learn representations of the unlabeled data. The representations are then used to train a classifier on the labeled data. The classifier is also fine-tuned using a reinforcement learning algorithm.
+
+The paper evaluated the proposed system on a dataset of bank transactions. The results showed that the system achieved an accuracy of 92.8\%, outperforming baselines that use only labeled data or only unlabeled data.
+
+\subsection{Transformer and LLM-Based Approaches}
+
+\textcolor{blue}{Neural networks offer a powerful approach for HS code classification by automatically learning complex patterns in text descriptions. Their ability to capture context makes them well-suited for this task, especially when dealing with large and diverse datasets. For example, \citet{Luppes2019} applied a convolutional neural network to classify text descriptions into HS2 and HS4 codes. They utilize public bill of lading data from DBpedia and a proprietary dataset, totaling over 79 million sentences. They achieved around 92\% F1-score at the HS2 level and 88\% accuracy for HS4 prediction.}
+
+\textcolor{blue}{The advent of deep learning and open-source large pre-trained language models has driven a shift toward more advanced NLP techniques for HS code and product classification. \citet{He2021} applied BERT-based text classification to HS code prediction on Chinese customs data, obtaining 88\%–99\% accuracy for 4-digit HS predictions within chapter 84. This suggested that transformers architecture can improve accuracy on short commodity descriptions.}
+
+\textcolor{blue}{Recent works have further explored LLMs for this task. \citet{Anggoro2023} fine-tuned BERT and its lightweight variant DistilBERT for HS classification within Chapters 84 and 85. Their focus was on comparing the full BERT model with the smaller distilled version, with DistilBERT achieving comparable accuracy to BERT. A subsequent article by the same authors explores using Sentence BERT and Multiple Negative Ranking Loss on the same dataset.}
+
+\subsection{Summary of Related Work}
+\textcolor{blue}{Table 1 provides an overview of the discussed studies in this domain, illustrating the evolution from early rule-based and classical ML methods to modern transformer-based approaches. }
+
+\begin{table}[h]
+    \centering
+    \renewcommand{\arraystretch}{1.2} % Adjust row height for readability
+    \fontsize{7pt}{9pt}\selectfont    \begin{tabular}{l l l}
+        \toprule
+        \textbf{Study (Year)} & \textbf{Domain \& Data} & \textbf{Approach} \\
+        \midrule
+        \citet{mukherjee2008classifying} & Procurement spend descriptions & SVM (bag-of-words + corrections) \\
+        \citet{garcia2020identifying} & Banking transactions & SVM (bag-of-words) \\
+        \citet{jorgensen2021machine} & Financial transactions & Char embeddings + ML \\
+        \citet{barbosaml2021} & HS Classification (six chapters) & Hierarchical classifiers (HS2→HS6) \\
+        \citet{chenmachine2021} & HS Classification & Unsupervised (embedding similarity) \\
+        \citet{toran2023scalable} & Bank transactions & Weakly-supervised (self-supervised + RL) \\
+        \citet{Luppes2019} & HS Classification (all 96 chapters) & CNN \\
+        \citet{He2021} & HS Classification (Chapter 84) & BERT + CNN ensemble \\
+        \citet{Anggoro2023} & HS Classification (Chapters 84 \& 85) & Fine-tuned BERT, DistilBERT \\
+        \bottomrule
+    \end{tabular}
+    \caption{Overview of studies on short-text classification approaches in various trade domains}
+    \label{tab:classification_studies}
+\end{table}
+
+\textcolor{blue}{The above studies motivate our proposed LLM-based framework, which builds on these advancements to tackle the full complexity of unstructured shipping manifest descriptions. Our train, test, and validation datasets each contain all 96 chapters, and over 3000 unique HS6 codes. Prior studies, with the exception of \citet{Luppes2019}, were far more limited in scope. \citet{Luppes2019} used an even larger dataset. However, they employed a custom convolutional neural network approach rather than a pre-trained transformer based model}
+
+\section{Methodology}
+\textcolor{blue}{This section outlines the training pipeline, computational environment, and evaluation strategy used in developing our LLM-based HS code classification model.}
+
+\subsection{Environment Setup}
+\textcolor{blue}{The methodology is implemented using SLURM job scheduling on SuperCloud high-performance computing infrastructure. The training process is distributed across multiple NVIDIA Volta GPUs to efficiently fine-tune large-scale transformer models. The SLURM script for managing runs includes resource allocation, job scheduling, and model selection.} 
+
+\subsection{Dataset and Preprocessing}
+\textcolor{blue}{The dataset consists of approximately 1.4 million product descriptions extracted from Indian shipping manifest records, each labeled with its corresponding HS code. Given the inherent inconsistencies in trade documentation, data preprocessing is a critical step to ensure compatibility with NLP-based models.}
+
+First, entries with descriptions less than three characters were removed. 
+
+
+\textcolor{blue}{}
+
+\begin{figure}[h]  
+    \centering
+    \includegraphics[width=\textwidth, height=10cm, keepaspectratio]{BERT_for_HS_diagram_V3.drawio.png} 
+    \textcolor{blue}{\caption{Process Flow Map for LLM Labelling}}
+    \label{fig:image_label}
+\end{figure}
+
+\subsection{Data Acquisition and Preprocessing}
+\textcolor{blue}{The dataset consists of approximately 1.4 million product descriptions extracted from Indian shipping manifest records, each labeled with its corresponding HS code. Given the inherent inconsistencies in trade documentation, data preprocessing is a critical step to ensure compatibility with NLP-based models.}
+
+\textcolor{blue}{Entries with product descriptions that are missing are dropped from the dataset. Text preprocessing begins with all product descriptions being converted to lowercase. Non-alphanumeric characters, including punctuation and non-alphanumeric symbols, are removed to minimize noise in the text data.}
+
+\textcolor{blue}{To facilitate efficient model training, the dataset is tokenized using a pretrained BERT tokenizer, which applies WordPiece tokenization. This is subword-based method that effectively handles rare words and domain-specific terminology. WordPiece tokenization segments words into smaller subword units, ensuring that unseen words can be decomposed into familiar components. Each product description is truncated to a maximum length of 512 tokens, ensuring compatibility with transformer-based models.}
+
+\textcolor{red}{The dataset is then stratified and split into training (60\%), validation (20\%), and test (20\%) sets, preserving the proportional distribution of HS codes across both subsets. The stratified sampling approach ensures that frequent and less common HS codes maintain their respective distributions. Both input product descriptions and labels are transformed into tensors, enabling direct ingestion by the model during fine-tuning.}
+
+\textcolor{blue}{This preprocessing pipeline ensures data consistency, structured input representation, and class balance, establishing a robust foundation for high-accuracy HS code classification.}
+
+
+\subsection{Classical Machine Learning (ML)}
+\begin{itemize}
+    \item Logistic Regression
+    \item SVM (linear)
+    \item \colorbox{red}{RandomForest}
+    \item \colorbox{red}{XGBoost}
+\end{itemize}
+\subsection{Large Language Models}
+\textcolor{blue}{Multiple transformer-based large language models (LLMs) are fine-tuned for HS code classification, including BERT multilingual, XLM-RoBERTa Large, RoBERTa, and RoBERTa Large. These models leverage transfer learning, where a pretrained language model is adapted to the HS code classification task through additional training on the labeled dataset. Fine-tuning is conducted using the Hugging Face Transformers library, which provides an efficient framework for processing textual data at scale.}
+
+\textcolor{red}{To optimize performance, the AdamW optimizer is employed with learning rate scheduling, ensuring controlled adjustments to the learning rate throughout training. Gradient accumulation is implemented to enhance training stability, effectively mitigating batch size limitations by accumulating gradients over multiple steps before updating model weights. Additionally, early stopping is applied based on validation loss and weighted F1 score, preventing overfitting by halting training when performance no longer improves.}
+
+\textcolor{red}{The training configuration is structured to improve generalization and computational efficiency. The model is trained for five epochs, using a batch size of 32 per device. Mixed-precision training (FP16) is enabled to accelerate computations while reducing memory consumption. Furthermore, stratified sampling is used during dataset splitting to preserve class distributions across training, validation, and test sets.}
+
+\subsection{Inference and Evaluation}
+
+\textcolor{blue}{Once fine-tuned, the model is deployed for inference, processing unseen product descriptions and generating predicted HS codes on the test set to assess classification performance. The primary evaluation metrics include accuracy, which represents the proportion of correctly classified instances out of the total, providing a straightforward measure of overall correctness.}
+
+\textcolor{blue}{We also report the weighted F1 score, which balances precision and recall across different classes. Precision measures how many of the predicted HS codes are actually correct, while recall measures how many of the actual HS codes in the dataset the model successfully identifies. The F1 score combines these two metrics into a single value.}
+
+\section{Results}
+
+\textcolor{blue}{In the table below, we compare the performance of various machine learning and large lanauge models:}
+
+\begin{table}[h]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|c|c|}
+\hline
+\textbf{Model Type} & \textbf{Model}            & \textbf{Accuracy} & \textbf{F1 (Weighted)} \\ \hline
+\multirow{2}{*}{Machine Learning} 
+                    & SVM                       & 74.3\%              & 0.749                    \\ \cline{2-4} 
+                    & Logistic Regression              & 68.8\%              & 0.704                   \\ \hline
+\multirow{4}{*}{LLM} 
+                    & BERT multilingual         & 87.2\%            & 0.868                  \\ \cline{2-4} 
+                    & XLM-RoBERTa Large         & 87.9\%            & 0.876                  \\ \cline{2-4} 
+                    & RoBERTa                   & 86.8\%            & 0.864                  \\ \cline{2-4} 
+                    & RoBERTa Large             & 85.2\%            & 0.845                  \\ \hline
+
+
+\end{tabular}}
+\caption{Classical ML and LLM Performance on 6-digit HS Classification}
+
+\end{table}
+
+
+
+\section{Discussion}
+\textcolor{blue}{The classification results indicate a clear performance advantage for transformer-based models over classical machine learning approaches. XLM-RoBERTa Large achieved the highest accuracy (87.9\%) and weighted F1-score (0.876), followed closely by BERT multilingual (87.2\%) and RoBERTa (86.8\%). In contrast, classical ML models such as SVM (74.3\%) and Logistic Regression (68.8\%) underperformed, reinforcing the importance of contextual embeddings in text classification tasks}
+
+\section{Conclusion}
+
+%\include{template_examples}
+
+
+\bibliographystyle{informs2014}
+\bibliography{references.bib}
+
+
+%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%
+
