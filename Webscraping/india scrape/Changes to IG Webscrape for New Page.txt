@@ -1,0 +1,24 @@
+Go to IG and search. Right click, inspect. Go to network. Update:
+
+
+Authorization =
+url =
+data =
+
+
+PATH
+search_id
+timestart
+timeend
+filename prefix
+contextID
+page number (total results /100 +1)
+
+
+search > insepct > network
+page 2 or 3 
+
+
+headers: authorization (include bearer)
+
+then payload: search ID, search dates, context ID
